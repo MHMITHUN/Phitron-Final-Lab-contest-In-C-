@@ -1,31 +1,46 @@
-#include <bits/stdc++.h>
-using namespace std;
+#include <stdio.h>
 
 int main() {
     int n;
-    cin >> n;
+    scanf("%d", &n);
 
-    vector<int> a(n);
-    vector<int> b(n);
+    int a[n], b[n], diff[n];
+    int i, j, temp;
 
-    for (int i = 0; i < n; i++) {
-        cin >> a[i];
+    for (i = 0; i < n; i++) {
+        scanf("%d", &a[i]);
     }
 
-    for (int i = 0; i < n; i++) {
-        cin >> b[i];
+    for (i = 0; i < n; i++) {
+        scanf("%d", &b[i]);
     }
 
-    sort(a.begin(), a.end()); // Sorting a in ascending order
-    sort(b.rbegin(), b.rend()); // Sorting b in descending order
+    for (i = 0; i < n - 1; i++) {
+        for (j = 0; j < n - i - 1; j++) {
+            if (a[j] > a[j + 1]) {
+                temp = a[j];
+                a[j] = a[j + 1];
+                a[j + 1] = temp;
+            }
+        }
+    }
 
-    vector<int> diff(n);
-    for (int i = 0; i < n; i++) {
+    for (i = 0; i < n - 1; i++) {
+        for (j = 0; j < n - i - 1; j++) {
+            if (b[j] < b[j + 1]) {
+                temp = b[j];
+                b[j] = b[j + 1];
+                b[j + 1] = temp;
+            }
+        }
+    }
+
+    for (i = 0; i < n; i++) {
         diff[i] = a[i] - b[i];
     }
 
-    for (int i = 0; i < n; i++) {
-        cout << diff[i] << " ";
+    for (i = 0; i < n; i++) {
+        printf("%d ", diff[i]);
     }
 
     return 0;
